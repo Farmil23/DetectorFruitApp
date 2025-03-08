@@ -10,13 +10,13 @@ async function uploadImage() {
     formData.append("file", file);
 
     try {
-        let response = await fetch("http://127.0.0.1:8000/predict/", {
+        let response = await fetch("http://detectorfruitfarmil.azurewebsites.net/predict/", {  // <-- Ubah URL backend ke Azure
             method: "POST",
             body: formData
         });
 
         let result = await response.json();
-        console.log("Response dari backend:", result);  // <-- Debugging
+        console.log("Response dari backend:", result);  // Debugging
 
         if (result.predictions && result.predictions.length > 0) {
             console.log("Prediksi diterima, menampilkan gambar...");
@@ -28,6 +28,7 @@ async function uploadImage() {
         console.error("Error saat mengirim gambar:", error);
     }
 }
+
 
 
 function displayImage(file, predictions) {
